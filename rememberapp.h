@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-#include <qrtm/service.h>
+#include "qrtm/src/service.h"
 
 class RememberApp : public QObject
 {

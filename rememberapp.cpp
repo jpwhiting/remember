@@ -2,10 +2,10 @@
 
 #include "apikey.h"
 
-#include <qrtm/listsmodel.h>
-#include <qrtm/service.h>
-#include <qrtm/task.h>
-#include <qrtm/filteredtasksmodel.h>
+#include "qrtm/src/listsmodel.h"
+#include "qrtm/src/service.h"
+#include "qrtm/src/task.h"
+#include "qrtm/src/filteredtasksmodel.h"
 
 #include <QtDeclarative>
 #include <QSettings>
