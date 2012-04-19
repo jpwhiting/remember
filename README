@@ -1,0 +1,5 @@
+This is the sources of Remember application for Harmattan/N9.
+The only thing missing to build and run this is your own apikey.h contents.  Once you have that filled in you can build this application in Qt SDK creator for Harmattan target.
+
+This first version is very simple and only reads tasks from an existing Remember The Milk account.  See the TODO file for upcoming features to be added.
+
