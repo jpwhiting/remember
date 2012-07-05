@@ -1,16 +1,25 @@
 import QtQuick 1.1
 import com.nokia.meego 1.0
+import com.jpwhiting 1.0
 
 PageStackWindow {
     id: appWindow
 
     initialPage: mainPage;
 
+    property Task chosenTask;
+
     function showTasks(name, id)
     {
         tasksPage.title = name;
         service.setListId(id);
         pageStack.push(tasksPage);
+    }
+
+    function editTask(taskobject)
+    {
+        chosenTask = taskobject;
+        pageStack.push(taskEditor);
     }
 
     QueryDialog {
@@ -48,6 +57,10 @@ PageStackWindow {
 
     TasksPage {
         id: tasksPage;
+    }
+
+    TaskEditor {
+        id: taskEditor;
     }
 
     ToolBarLayout {
