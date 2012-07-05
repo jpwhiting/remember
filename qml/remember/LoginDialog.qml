@@ -20,10 +20,12 @@ Dialog {
             id: titleRect;
             width: parent.width;
             height: titleLabel.height + 15;
-            color: "red";
+            color: "navy";
             Label {
                 id: titleLabel;
-                anchors.fill: parent;
+                anchors.left: parent.left;
+                anchors.right: parent.right;
+                width: parent.width;
                 horizontalAlignment: Text.AlignHCenter;
                 verticalAlignment: Text.AlignVCenter;
                 platformStyle: LabelStyle {
