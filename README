@@ -1,5 +1,27 @@
-This is the sources of Remember application for Harmattan/N9.
-The only thing missing to build and run this is your own apikey.h contents.  Once you have that filled in you can build this application in Qt SDK creator for Harmattan target.
+Remember - A Remember The Milk application for N9
 
-This first version is very simple and only reads tasks from an existing Remember The Milk account.  See the TODO file for upcoming features to be added.
+Remember is a simple application for N9 that gives you access to your Remember The Milk task lists. It's currently under development.
+
+Already included features:
+
+    Log in and out of your rtm account.
+    Show list of lists.
+    Show tasks for regular lists (smart lists not yet supported).
+        Includes sorting by the same sorting method used in the web interface.
+        Shows priority, tags, due date, etc.
+
+Features to be added:
+
+    Adding and editing tasks
+    Smart list support
+    Searching
+
+Build instructions:
+
+    clone it.
+    Put your rtm api key in apikey.h
+    Clone qrtm from within remember's source folder. qrtm can be cloned from git://github.com/jpwhiting/qrtm.git
+    Open rememberapp.pro from within Qt SDK creator.
+    Build and deploy.
+
 
