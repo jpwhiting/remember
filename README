@@ -9,11 +9,11 @@ Already included features:
     Show tasks for regular lists (smart lists not yet supported).
         Includes sorting by the same sorting method used in the web interface.
         Shows priority, tags, due date, etc.
+    Smart list support
 
 Features to be added:
 
     Adding and editing tasks
-    Smart list support
     Searching
 
 Build instructions:
@@ -21,6 +21,7 @@ Build instructions:
     clone it.
     Put your rtm api key in apikey.h
     Clone qrtm from within remember's source folder. qrtm can be cloned from git://github.com/jpwhiting/qrtm.git
+    Change qrtm.pro to set PREFIX to /opt/remember instead of /usr/local
     Open rememberapp.pro from within Qt SDK creator.
     Build and deploy.
 
