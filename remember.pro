@@ -10,7 +10,8 @@ CONFIG += link_pkgconfig
 PKGCONFIG += QJson
 
 QMAKE_LFLAGS += -Wl,--rpath=/opt/remember/lib
-LIBS += -Lqrtm/ -lqrtm
+LIBS += qrtm/libqrtm.so
+PRE_TARGETDEPS += qrtm/libqrtm.so
 
 # If your application uses the Qt Mobility libraries, uncomment the following
 # lines and add the respective components to the MOBILITY variable.

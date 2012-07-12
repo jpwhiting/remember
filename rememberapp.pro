@@ -1,2 +1,3 @@
 TEMPLATE=subdirs
-SUBDIRS=remember.pro qrtm
+CONFIG += ordered
+SUBDIRS=qrtm remember.pro
