@@ -7,8 +7,6 @@ PageStackWindow {
 
     initialPage: mainPage;
 
-    property Task chosenTask;
-
     function showTasks(name, id)
     {
         tasksPage.title = name;
@@ -16,9 +14,8 @@ PageStackWindow {
         pageStack.push(tasksPage);
     }
 
-    function editTask(taskobject)
+    function editTask()
     {
-        chosenTask = taskobject;
         pageStack.push(taskEditor);
     }
 
