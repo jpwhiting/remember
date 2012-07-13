@@ -24,7 +24,7 @@ Page {
                 verticalCenter: parent.verticalCenter;
             }
 
-            text: "Edit task";
+            text: "Task details";
             font.pixelSize: 32;
             color: "white";
         }
@@ -56,18 +56,19 @@ Page {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 height: 100
-                text: appWindow.chosenTask.name;
+                text: service.currentTask.name;
                 wrapMode: TextEdit.Wrap
             }
 
             Label {
                 text: "Due:"
+                visible: duedateText.text.length > 0;
             }
 
             Text {
                 id: duedateText;
                 height: 30;
-                text: Qt.formatDate(appWindow.chosenTask.duedate);
+                text: Qt.formatDate(service.currentTask.duedate);
                 font.pixelSize: 25;
             }
 
@@ -80,7 +81,7 @@ Page {
                 spacing: 5;
 
                 Repeater {
-                    model: appWindow.chosenTask.tags;
+                    model: service.currentTask.tags;
 
                     Rectangle {
                         color: "lightsteelblue";

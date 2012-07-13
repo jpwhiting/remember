@@ -58,7 +58,8 @@ Page {
                 anchors.top: parent.top;
                 anchors.bottom: parent.bottom;
                 onClicked: {
-                    appWindow.editTask(service.tasksModel.taskForRow(index));
+                    service.setCurrentTask(index);
+                    appWindow.editTask();
                 }
             }
 
