@@ -58,7 +58,7 @@ Page {
                 anchors.top: parent.top;
                 anchors.bottom: parent.bottom;
                 onClicked: {
-                    service.setCurrentTask(index);
+                    remember.setCurrentTask(index);
                     appWindow.editTask();
                 }
             }

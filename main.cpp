@@ -15,7 +15,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     RememberApp *rememberApp = new RememberApp;
 
     QmlApplicationViewer viewer;
-    viewer.engine()->rootContext()->setContextProperty("myApp", rememberApp);
+    viewer.engine()->rootContext()->setContextProperty("remember", rememberApp);
     viewer.engine()->rootContext()->setContextProperty("service", rememberApp->getService());
     viewer.setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
     viewer.setMainQmlFile(QLatin1String("qml/remember/main.qml"));

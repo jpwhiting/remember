@@ -56,7 +56,7 @@ Page {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 height: 100
-                text: service.currentTask.name;
+                text: remember.currentTask.name;
                 wrapMode: TextEdit.Wrap
             }
 
@@ -68,7 +68,7 @@ Page {
             Text {
                 id: duedateText;
                 height: 30;
-                text: Qt.formatDate(service.currentTask.duedate);
+                text: Qt.formatDate(remember.currentTask.duedate);
                 font.pixelSize: 25;
             }
 
@@ -81,7 +81,7 @@ Page {
                 spacing: 5;
 
                 Repeater {
-                    model: service.currentTask.tags;
+                    model: remember.currentTask.tags;
 
                     Rectangle {
                         color: "lightsteelblue";

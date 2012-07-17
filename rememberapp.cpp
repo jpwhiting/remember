@@ -18,6 +18,7 @@ class RememberApp::Private {
 public:
 
     RTM::Service *service;
+    RTM::Task *currentTask;
     QSettings settings;
     QString authToken;
 };
@@ -26,6 +27,7 @@ RememberApp::RememberApp(QObject *parent) :
     QObject(parent), d(new Private)
 {
     d->service = new RTM::Service(kRTMKey, kRTMSecret, this);
+    d->currentTask = NULL;
     connect(d->service, SIGNAL(authenticationDone(bool)),
             SLOT(onAuthenticationDone(bool)));
     d->authToken = d->settings.value(kAuthTokenKey).toString();
@@ -66,3 +68,17 @@ RTM::Service *RememberApp::getService() const
     return d->service;
 }
 
+void RememberApp::setCurrentTask(int row)
+{
+    RTM::Task * task = d->service->getTasksModel()->taskForRow(row);
+    if (task && task != d->currentTask)
+    {
+        d->currentTask = task;
+        emit currentTaskChanged();
+    }
+}
+
+RTM::Task *RememberApp::getCurrentTask() const
+{
+    return d->currentTask;
+}
