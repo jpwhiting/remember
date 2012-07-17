@@ -1,0 +1,13 @@
+Features to add to Remember N9 Remember The Milk application.
+
+ - "Don't show again" checkbox on splash screen.
+ - Busy spinner when loading from network.
+ - Mark task as completed.
+ - Edit task.
+ - Tag chooser.
+ - List filtering.
+ - Search interface.
+ - Create smart list from search results.
+ - Store data in local database.
+
+
