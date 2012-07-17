@@ -1,0 +1,18 @@
+Remember - A Remember The Milk application for N9
+
+Remember 0.0.1 stores a key once you log in and allow the Application to access
+your Remember The Milk tasks so that it can fetch your lists every time you
+run the application.  Username and passsword are not stored in any way on your
+device.  If you do not want Remember to store the key to access your account,
+you can choose "Log out" from the bottom menu at any time.  If you no longer
+want Remember to be able to access your tasks, lists, and other data, you can
+use the Remember The Milk website to revoke access by visiting: Settings,
+Services and revoking access to Remember.
+
+Currently your tasks, lists, and any other data associated with your
+Remember The Milk account is not stored on your N9 at all in any way.  Every
+time the Remember application is run it downloads lists, tasks, and all other
+information from the network.
+
+The Remember The Milk service privacy policy can be found at
+http://www.rememberthemilk.com/help/privacy.rtm
