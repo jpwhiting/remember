@@ -10,7 +10,7 @@ PageStackWindow {
     function showTasks(name, id)
     {
         tasksPage.title = name;
-        service.setListId(id);
+        remember.setListId(id);
         pageStack.push(tasksPage);
     }
 

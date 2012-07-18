@@ -151,7 +151,7 @@ Page {
             left: parent.left;
         }
 
-        model: service.tasksModel;
+        model: remember.tasksModel;
         delegate: tasksDelegate;
         focus: true;
         clip: true;
