@@ -81,7 +81,7 @@ Page {
         }
 
         delegate: listsDelegate;
-        model: service.listsModel;
+        model: remember.listsModel;
         focus: true;
         clip: true;
     }

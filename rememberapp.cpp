@@ -37,6 +37,7 @@ public:
 
     RTM::Service *service;
 
+    RTM::ListsModel *listsModel;
     RTM::TasksModel *tasksModel;
     RTM::FilteredTasksModel *filteredTasksModel;
     QMap<RTM::Request*, QString> smartListRequestIds;
@@ -53,6 +54,9 @@ RememberApp::RememberApp(QObject *parent) :
     d->service = new RTM::Service(kRTMKey, kRTMSecret, this);
     d->currentTask = NULL;
 
+    d->listsModel = new RTM::ListsModel(d->service);
+    connect(d->service, SIGNAL(listsGetListFinished(QVariantMap,RTM::ResponseStatus)),
+            d->listsModel, SLOT(onGetListFinished(QVariantMap,RTM::ResponseStatus)));
     d->tasksModel = new RTM::TasksModel(this);
     d->filteredTasksModel = new RTM::FilteredTasksModel(this);
     d->filteredTasksModel->setSourceModel(d->tasksModel);
@@ -65,7 +69,7 @@ RememberApp::RememberApp(QObject *parent) :
             this, SLOT(onTasksGetSmartListFinished(QString,QVariantMap, RTM::ResponseStatus)));
 
     d->authToken = d->settings.value(kAuthTokenKey).toString();
-    connect(d->service->getListsModel(), SIGNAL(loadedListInfo(RTM::List*)),
+    connect(d->listsModel, SIGNAL(loadedListInfo(RTM::List*)),
             this, SLOT(onLoadedListInfo(RTM::List*)));
 
     qmlRegisterType<RTM::Service>("com.jpwhiting", 1, 0, "Service");
@@ -73,6 +77,15 @@ RememberApp::RememberApp(QObject *parent) :
     qmlRegisterType<RTM::Task>("com.jpwhiting", 1, 0, "Task");
     qmlRegisterType<RTM::FilteredTasksModel>("com.jpwhiting", 1, 0, "FilteredTasksModel");
     qmlRegisterType<RememberApp>("com.jpwhiting", 1, 0, "RememberApp");
+}
+
+RememberApp::~RememberApp()
+{
+    delete d->listsModel;
+    d->listsModel = NULL;
+
+    delete d->tasksModel;
+    d->tasksModel = NULL;
 }
 
 void RememberApp::start()
@@ -99,7 +112,14 @@ void RememberApp::onAuthenticationDone(bool success)
     }
     else
     {
+        d->listsModel->clear();
         d->tasksModel->clear();
+        Q_FOREACH (RTM::TasksModel* model, d->smartListTasksModels)
+        {
+            model->clear();
+        }
+
+        d->smartListTasksModels.clear();
     }
 }
 
@@ -118,6 +138,11 @@ void RememberApp::setCurrentTask(int row)
     }
 }
 
+RTM::ListsModel *RememberApp::getListsModel() const
+{
+    return d->listsModel;
+}
+
 RTM::Task *RememberApp::getCurrentTask() const
 {
     return d->currentTask;
@@ -131,7 +156,7 @@ RTM::FilteredTasksModel *RememberApp::getTasksModel() const
 void RememberApp::setListId(QString id)
 {
     // Get the list parameters from from the listsModel.
-    RTM::List *list = d->service->getListsModel()->listFromId(id);
+    RTM::List *list = d->listsModel->listFromId(id);
 
     if (list->isSmart())
     {

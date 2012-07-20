@@ -22,13 +22,18 @@
 #include <QObject>
 
 #include "qrtm/src/rtm.h"
-#include "qrtm/src/filteredtasksmodel.h"
 #include "qrtm/src/service.h"
-#include "qrtm/src/task.h"
+
+namespace RTM {
+    class FilteredTasksModel;
+    class ListsModel;
+    class Task;
+}
 
 class RememberApp : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(RTM::ListsModel * listsModel READ getListsModel)
     Q_PROPERTY(RTM::Task * currentTask
                READ getCurrentTask
                NOTIFY currentTaskChanged)
@@ -36,9 +41,11 @@ class RememberApp : public QObject
 
 public:
     explicit RememberApp(QObject *parent = 0);
+    virtual ~RememberApp();
 
     void start();
 
+    Q_INVOKABLE RTM::ListsModel *getListsModel() const;
     Q_INVOKABLE RTM::Task *getCurrentTask() const;
     Q_INVOKABLE RTM::FilteredTasksModel *getTasksModel() const;
 
