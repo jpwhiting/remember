@@ -28,11 +28,7 @@ PageStackWindow {
     Connections {
         target: service;
         onAuthenticationDone: {
-            if (success) {
-                service.listsGetList();
-                service.tasksGetList();
-            }
-            else
+            if (!success)
             {
                 loginDialog.open();
             }

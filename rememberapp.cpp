@@ -109,6 +109,10 @@ void RememberApp::onAuthenticationDone(bool success)
         // Get the auth key and write it to settings.
         d->authToken = d->service->getToken();
         d->settings.setValue(kAuthTokenKey, d->authToken);
+
+        // Request lists and tasks.
+        d->service->listsGetList();
+        d->service->tasksGetList();
     }
     else
     {
