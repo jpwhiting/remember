@@ -36,6 +36,7 @@ Page {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
+        anchors.margins: UiConstants.DefaultMargin
         contentWidth: col.width
         contentHeight: col.height
         flickableDirection: Flickable.VerticalFlick
@@ -74,6 +75,7 @@ Page {
 
             Label {
                 text: "Tags:"
+                visible: tagsrow.height > 0;
             }
 
             Row {
