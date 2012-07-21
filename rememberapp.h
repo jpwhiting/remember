@@ -51,6 +51,11 @@ public:
 
     Q_INVOKABLE void setListId(QString id);
 
+    // Get whether or not to show the splash screen.
+    // By default as soon as it has been shown once, it wont be shown again
+    // unless the user asks for it from menu -> About
+    Q_INVOKABLE bool showSplashScreen() const;
+
     RTM::Service *getService() const;
 signals:
     void currentTaskChanged();

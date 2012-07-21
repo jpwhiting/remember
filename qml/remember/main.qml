@@ -19,12 +19,6 @@ PageStackWindow {
         pageStack.push(taskEditor);
     }
 
-    QueryDialog {
-        id: splashMessage;
-        message: qsTr("This product uses the Remember The Milk API but is not endorsed or certified by Remember The Milk.");
-        acceptButtonText: qsTr("OK");
-    }
-
     Connections {
         target: service;
         onAuthenticationDone: {
@@ -81,10 +75,25 @@ PageStackWindow {
                 text: qsTr("Log out");
                 onClicked: myApp.forgetAuthToken();
             }
+            MenuItem {
+                text: qsTr("About");
+                onClicked: aboutDialog.open();
+            }
         }
     }
 
+    QueryDialog {
+        id: aboutDialog;
+        titleText: qsTr("Remember - A simple application to access Remember The Milt tasks.");
+        message: qsTr("<b>Remember</b> uses the Remember The Milk API but is not "
+                      + "endorsed or certified by Remember The Milk.");
+        acceptButtonText: qsTr("OK");
+    }
+
     Component.onCompleted: {
-        splashMessage.open();
+        if (remember.showSplashScreen())
+        {
+            aboutDialog.open();
+        }
     }
 }

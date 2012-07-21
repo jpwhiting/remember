@@ -132,6 +132,17 @@ RTM::Service *RememberApp::getService() const
     return d->service;
 }
 
+bool RememberApp::showSplashScreen() const
+{
+    bool retval = false;
+    if (!d->settings.contains("FirstRunComplete"))
+    {
+        retval = true;
+        d->settings.setValue("FirstRunComplete", true);
+    }
+    return retval;
+}
+
 void RememberApp::setCurrentTask(int row)
 {
     RTM::Task * task = d->filteredTasksModel->taskForRow(row);
