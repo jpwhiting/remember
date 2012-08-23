@@ -21,11 +21,12 @@
 
 #include <QObject>
 
-#include "qrtm/src/rtm.h"
-#include "qrtm/src/service.h"
+#include "rtm/rtm.h"
+#include "rtm/session.h"
 
 namespace RTM {
     class FilteredTasksModel;
+    class List;
     class ListsModel;
     class Task;
 }
@@ -49,14 +50,14 @@ public:
     Q_INVOKABLE RTM::Task *getCurrentTask() const;
     Q_INVOKABLE RTM::FilteredTasksModel *getTasksModel() const;
 
-    Q_INVOKABLE void setListId(QString id);
+    Q_INVOKABLE void setListId(qulonglong id);
 
     // Get whether or not to show the splash screen.
     // By default as soon as it has been shown once, it wont be shown again
     // unless the user asks for it from menu -> About
     Q_INVOKABLE bool showSplashScreen() const;
 
-    RTM::Service *getService() const;
+    RTM::Session *getSession() const;
 signals:
     void currentTaskChanged();
 
@@ -69,11 +70,8 @@ public slots:
 
 private slots:
     void onAuthenticationDone(bool success);
-    void onLoadedListInfo(RTM::List *listInfo);
-    void onTasksGetListFinished(QVariantMap response,
-                                RTM::ResponseStatus status);
-    void onTasksGetSmartListFinished(QString listId, QVariantMap response,
-                                     RTM::ResponseStatus status);
+
+    void onListChanged(RTM::List* list);
 
 private:
     class Private;

@@ -73,7 +73,7 @@ Dialog {
         Button {
             text: qsTr("Press when done");
             onClicked: {
-                service.authRequestToken();
+                session.continueAuthForToken();
                 loginDialog.accept();
             }
         }

@@ -1,3 +1,4 @@
 TEMPLATE=subdirs
 CONFIG += ordered
-SUBDIRS=qrtm remember.pro
+DEFINES += QTONLY
+SUBDIRS=rtm remember.pro

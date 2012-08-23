@@ -32,7 +32,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     QmlApplicationViewer viewer;
     viewer.engine()->rootContext()->setContextProperty("remember", rememberApp);
-    viewer.engine()->rootContext()->setContextProperty("service", rememberApp->getService());
+    viewer.engine()->rootContext()->setContextProperty("session", rememberApp->getSession());
     viewer.setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
     viewer.setMainQmlFile(QLatin1String("qml/remember/main.qml"));
     viewer.showExpanded();

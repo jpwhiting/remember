@@ -8,10 +8,11 @@ QML_IMPORT_PATH =
 
 CONFIG += link_pkgconfig
 PKGCONFIG += QJson
+DEFINES += QTONLY
 
 QMAKE_LFLAGS += -Wl,--rpath=/opt/remember/lib
-LIBS += qrtm/libqrtm.so
-PRE_TARGETDEPS += qrtm/libqrtm.so
+LIBS += rtm/librtm.so
+PRE_TARGETDEPS += rtm/librtm.so
 
 # If your application uses the Qt Mobility libraries, uncomment the following
 # lines and add the respective components to the MOBILITY variable.
@@ -22,8 +23,11 @@ PRE_TARGETDEPS += qrtm/libqrtm.so
 CONFIG += qdeclarative-boostable
 
 # The .cpp file which was generated for your project. Feel free to hack it.
-SOURCES += main.cpp \
-    rememberapp.cpp
+SOURCES += src/main.cpp \
+    src/rememberapp.cpp \
+    src/filteredtasksmodel.cpp \
+    src/listsmodel.cpp \
+    src/tasksmodel.cpp
 
 # Please do not modify the following two lines. Required for deployment.
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
@@ -39,5 +43,8 @@ OTHER_FILES += \
     qtc_packaging/debian_harmattan/changelog
 
 HEADERS += \
-    apikey.h \
-    rememberapp.h
+    src/apikey.h \
+    src/rememberapp.h \
+    src/filteredtasksmodel.h \
+    src/listsmodel.h \
+    src/tasksmodel.h

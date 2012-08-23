@@ -20,17 +20,13 @@ PageStackWindow {
     }
 
     Connections {
-        target: service;
-        onAuthenticationDone: {
+        target: session;
+        onTokenCheck: {
             if (!success)
             {
                 loginDialog.open();
+                loginDialog.url = session.getAuthUrl();
             }
-        }
-
-        onAuthenticationLoadUrl: {
-            loginDialog.open();
-            loginDialog.url = url;
         }
     }
 

@@ -69,7 +69,7 @@ Page {
             Text {
                 id: duedateText;
                 height: 30;
-                text: Qt.formatDate(remember.currentTask.duedate);
+                text: Qt.formatDate(remember.currentTask.due);
                 font.pixelSize: 25;
             }
 

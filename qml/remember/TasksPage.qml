@@ -19,9 +19,9 @@ Page {
                 anchors.right: checkBox.left;
                 anchors.margins: 5;
                 anchors.bottom: parent.bottom;
-                color: (priority == Task.High ? "orange" :
-                        (priority == Task.Medium ? "blue" :
-                         (priority == Task.Low ? "lightblue" : "lightgrey")));
+                color: (priority == 1 ? "orange" :
+                        (priority == 2 ? "blue" :
+                         (priority == 3 ? "lightblue" : "lightgrey")));
                 width: 15;
             }
 
