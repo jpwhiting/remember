@@ -30,6 +30,7 @@ Page {
                 anchors.verticalCenter: nameText.verticalCenter;
                 anchors.left: parent.left;
                 anchors.leftMargin: 20;
+                onClicked: remember.selectTask(index, checkBox.checked);
             }
 
             Label {

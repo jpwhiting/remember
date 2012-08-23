@@ -57,6 +57,13 @@ PageStackWindow {
         }
 
         ToolIcon {
+            id: doneButton;
+            iconId: "icon-m-toolbar-done";
+            onClicked: remember.markTasksCompleted();
+            visible: remember.selectedTasksCount > 0;
+        }
+
+        ToolIcon {
             platformIconId: "toolbar-view-menu"
             anchors.right: (parent === undefined) ? undefined : parent.right
             onClicked: (myMenu.status === DialogStatus.Closed) ? myMenu.open() : myMenu.close()
@@ -69,7 +76,7 @@ PageStackWindow {
         MenuLayout {
             MenuItem {
                 text: qsTr("Log out");
-                onClicked: myApp.forgetAuthToken();
+                onClicked: remember.forgetAuthToken();
             }
             MenuItem {
                 text: qsTr("About");

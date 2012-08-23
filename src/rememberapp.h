@@ -39,6 +39,8 @@ class RememberApp : public QObject
                READ getCurrentTask
                NOTIFY currentTaskChanged)
     Q_PROPERTY(RTM::FilteredTasksModel * tasksModel READ getTasksModel)
+    Q_PROPERTY(int selectedTasksCount READ getSelectedTasksCount
+               NOTIFY selectedTasksCountChanged)
 
 public:
     explicit RememberApp(QObject *parent = 0);
@@ -51,6 +53,8 @@ public:
     Q_INVOKABLE RTM::FilteredTasksModel *getTasksModel() const;
 
     Q_INVOKABLE void setListId(qulonglong id);
+    // Select or deselect the task at given row.
+    Q_INVOKABLE void selectTask(int row, bool select);
 
     // Get whether or not to show the splash screen.
     // By default as soon as it has been shown once, it wont be shown again
@@ -58,8 +62,11 @@ public:
     Q_INVOKABLE bool showSplashScreen() const;
 
     RTM::Session *getSession() const;
+    int getSelectedTasksCount() const;
+
 signals:
     void currentTaskChanged();
+    void selectedTasksCountChanged();
 
 public slots:
     // Forget the auth token, to log in again or as someone else.
@@ -67,6 +74,9 @@ public slots:
 
     // Set the current task to the task from filtered tasks model at row given.
     void setCurrentTask(int row);
+
+    // Mark the selected tasks as completed.
+    void markTasksCompleted();
 
 private slots:
     void onAuthenticationDone(bool success);

@@ -24,7 +24,6 @@
 #include "listsmodel.h"
 #include "tasksmodel.h"
 #include "rtm/request.h"
-#include "rtm/session.h"
 #include "rtm/task.h"
 
 #include <QtDeclarative>
@@ -42,6 +41,7 @@ public:
     QMap<RTM::ListId, RTM::TasksModel *> tasksModels;
 
     RTM::Task *currentTask;
+    QMap<RTM::TaskId, RTM::Task*> selectedTasks;
     QSettings settings;
     QString authToken;
 };
@@ -145,6 +145,16 @@ void RememberApp::setCurrentTask(int row)
     }
 }
 
+void RememberApp::markTasksCompleted()
+{
+    Q_FOREACH(RTM::Task* task, d->selectedTasks.values())
+    {
+        task->setCompleted(true);
+    }
+    d->selectedTasks.clear();
+    emit selectedTasksCountChanged();
+}
+
 RTM::ListsModel *RememberApp::getListsModel() const
 {
     return d->listsModel;
@@ -164,6 +174,7 @@ void RememberApp::setListId(qulonglong id)
 {
     // Get the list parameters from from the listsModel.
     RTM::List *list = d->listsModel->listFromId(id);
+    d->selectedTasks.clear();
 
     Q_ASSERT(d->tasksModels.contains(list->id()));
 
@@ -173,5 +184,25 @@ void RememberApp::setListId(qulonglong id)
 
     // Give the list parameters to the filtered model
     d->filteredTasksModel->setListParameters(list->sortOrder());
+}
+
+int RememberApp::getSelectedTasksCount() const
+{
+    return d->selectedTasks.count();
+}
+
+void RememberApp::selectTask(int row, bool select)
+{
+    RTM::Task* task = d->filteredTasksModel->taskForRow(row);
+    if (select)
+    {
+        d->selectedTasks.insert(task->id(), task);
+    }
+    else
+    {
+        d->selectedTasks.remove(task->id());
+    }
+
+    emit selectedTasksCountChanged();
 }
 
