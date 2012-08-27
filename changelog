@@ -1,0 +1,22 @@
+remember (0.0.3) unstable; urgency=low
+  * Mark tasks as completed support
+
+ -- Jeremy Whiting <jpwhiting@kde.org>  Wed, 22 Aug 2012 23:59:45 -0600
+
+remember (0.0.2) unstable; urgency=low
+
+  * Smart list support
+  * Only show about dialog on first run
+  * Task editor ui cleaned up
+
+ -- Jeremy Whiting <jpwhiting@kde.org>  Fri, 20 Jul 2012 23:15:45 -0600
+
+remember (0.0.1) unstable; urgency=low
+
+  * Initial Release.
+  * Login to remember the milk read only.
+  * Show lists of tasks.
+  * Shows priority, date due, tags, etc.
+
+ -- Jeremy Whiting <jpwhiting@kde.org>  Wed, 28 Mar 2012 20:04:45 -0600
+
