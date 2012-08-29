@@ -42,6 +42,7 @@ public:
 
     RTM::Task *currentTask;
     QMap<RTM::TaskId, RTM::Task*> selectedTasks;
+    qulonglong currentListId;
     QSettings settings;
     QString authToken;
 };
@@ -184,6 +185,7 @@ void RememberApp::setListId(qulonglong id)
 
     // Give the list parameters to the filtered model
     d->filteredTasksModel->setListParameters(list->sortOrder());
+    d->currentListId = id;
 }
 
 int RememberApp::getSelectedTasksCount() const
@@ -206,3 +208,12 @@ void RememberApp::selectTask(int row, bool select)
     emit selectedTasksCountChanged();
 }
 
+void RememberApp::addTask(QString taskText)
+{
+    d->session->addTask(taskText, d->currentListId);
+}
+
+void RememberApp::addList(QString listText)
+{
+    d->session->addList(listText);
+}

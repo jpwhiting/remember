@@ -46,21 +46,74 @@ PageStackWindow {
         id: taskEditor;
     }
 
+    Dialog {
+        id: newTaskDialog;
+        title: Label {
+            text: (pageStack.currentPage == tasksPage ? "New task" : "New list")
+            platformStyle: LabelStyle {
+                textColor: "white"
+            }
+        }
+        content: Item {
+                width: parent.width + 20;
+                height: 120;
+
+                TextArea {
+                    id: edit
+                    width: parent.width
+                    height: 100
+                    placeholderText: (pageStack.currentPage == tasksPage ?
+                                          "Enter task name" : "Enter list name")
+                    wrapMode: TextEdit.Wrap
+                }
+            }
+        buttons: ButtonRow {
+            id: buttonRow;
+            anchors.horizontalCenter: parent.horizontalCenter
+            Button {
+                text: "Cancel"
+                onClicked: {
+                    newTaskDialog.reject();
+                }
+            }
+
+            Button {
+                text: "Add"
+                onClicked: {
+                    if (pageStack.currentPage == tasksPage)
+                        remember.addTask(edit.text);
+                    else
+                        remember.addList(edit.text);
+                    newTaskDialog.accept();
+                }
+            }
+
+        }
+    }
+
     ToolBarLayout {
         id: commonTools
         visible: false
         ToolIcon {
             id: backButton;
-            iconId: "icon-m-toolbar-back";
+            platformIconId: "toolbar-back";
             onClicked: pageStack.pop();
             visible: (pageStack.depth > 1);
         }
 
         ToolIcon {
             id: doneButton;
-            iconId: "icon-m-toolbar-done";
+            platformIconId: "toolbar-done";
             onClicked: remember.markTasksCompleted();
             visible: remember.selectedTasksCount > 0;
+        }
+
+        ToolIcon {
+            id: addButton;
+            platformIconId: "toolbar-add"
+            onClicked: newTaskDialog.open();
+            visible: (pageStack.currentPage == tasksPage ||
+                      pageStack.currentPage == mainPage);
         }
 
         ToolIcon {

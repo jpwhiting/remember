@@ -55,6 +55,10 @@ public:
     Q_INVOKABLE void setListId(qulonglong id);
     // Select or deselect the task at given row.
     Q_INVOKABLE void selectTask(int row, bool select);
+    // Add a task to the current list.
+    Q_INVOKABLE void addTask(QString taskText);
+    // Add a list.
+    Q_INVOKABLE void addList(QString listText);
 
     // Get whether or not to show the splash screen.
     // By default as soon as it has been shown once, it wont be shown again
