@@ -1,5 +1,7 @@
 remember (0.0.3) unstable; urgency=low
   * Mark tasks as completed support
+  * Add task support
+  * Create list support
 
  -- Jeremy Whiting <jpwhiting@kde.org>  Wed, 22 Aug 2012 23:59:45 -0600
 

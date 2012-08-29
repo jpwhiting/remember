@@ -6,23 +6,26 @@ Already included features:
 
     Log in and out of your rtm account.
     Show list of lists.
-    Show tasks for regular lists (smart lists not yet supported).
+    Show tasks for all lists including smart lists
         Includes sorting by the same sorting method used in the web interface.
         Shows priority, tags, due date, etc.
-    Smart list support
+    Marking tasks as completed
+    Adding new tasks to existing lists
+    Creating new lists
 
 Features to be added:
 
-    Adding and editing tasks
+    Editing tasks
     Searching
 
 Build instructions:
 
     clone it.
     Put your rtm api key in apikey.h
-    Clone qrtm from within remember's source folder. qrtm can be cloned from git://github.com/jpwhiting/qrtm.git
-    Change qrtm.pro to set PREFIX to /opt/remember instead of /usr/local
+    Clone kdeplasma-addons from git.kde.org
+    Symlink kdeplasma-addons/libs/rtm from remember directory
     Open rememberapp.pro from within Qt SDK creator.
+    Add QTONLY=1 to qmake arguments for project.
     Build and deploy.
 
 
