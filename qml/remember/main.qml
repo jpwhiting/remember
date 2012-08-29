@@ -84,6 +84,7 @@ PageStackWindow {
                         remember.addTask(edit.text);
                     else
                         remember.addList(edit.text);
+                    edit.text = "";
                     newTaskDialog.accept();
                 }
             }
