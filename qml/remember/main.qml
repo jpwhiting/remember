@@ -1,5 +1,6 @@
 import QtQuick 1.1
 import com.nokia.meego 1.0
+import com.nokia.extras 1.1
 import com.jpwhiting 1.0
 
 PageStackWindow {
@@ -105,8 +106,9 @@ PageStackWindow {
         ToolIcon {
             id: doneButton;
             platformIconId: "toolbar-done";
-            onClicked: remember.markTasksCompleted();
-            visible: remember.selectedTasksCount > 0;
+            onClicked: (pageStack.currentPage == tasksPage ? remember.markTasksCompleted()
+                                                           : taskEditor.commitTaskChanges())
+            visible: remember.selectedTasksCount > 0 || pageStack.currentPage == taskEditor;
         }
 
         ToolIcon {

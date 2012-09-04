@@ -1,9 +1,32 @@
 import QtQuick 1.1
 import com.nokia.meego 1.0
+import com.nokia.extras 1.1
 import com.jpwhiting 1.0
 
 Page {
     tools: commonTools;
+    property date newdate;
+
+    function commitTaskChanges()
+    {
+        if (edit.text != remember.currentTask.name)
+            remember.currentTask.name = edit.text;
+
+        if (newdate != remember.currentTask.due)
+            remember.currentTask.due = newdate;
+
+        newdate = new Date();
+        pageStack.pop();
+    }
+
+    DatePickerDialog {
+        id: dueDatePicker
+        titleText: "Due date"
+        onAccepted: {
+            newdate = new Date(dueDatePicker.year+"-"+dueDatePicker.month+"-"+dueDatePicker.day);
+            duedateText.text = Qt.formatDate(newdate);
+        }
+    }
 
     Rectangle {
         id: label;
@@ -62,6 +85,7 @@ Page {
             }
 
             Label {
+                id: dueLabel
                 text: "Due:"
                 visible: duedateText.text.length > 0;
             }
@@ -71,6 +95,13 @@ Page {
                 height: 30;
                 text: Qt.formatDate(remember.currentTask.due);
                 font.pixelSize: 25;
+            }
+
+            Button {
+                id: addDueDate;
+                text: qsTr("Add due date");
+                onClicked: dueDatePicker.open()
+                visible: !dueLabel.visible
             }
 
             Label {
