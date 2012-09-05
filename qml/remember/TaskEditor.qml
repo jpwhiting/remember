@@ -5,17 +5,20 @@ import com.jpwhiting 1.0
 
 Page {
     tools: commonTools;
-    property date newdate;
+
+    onStatusChanged: {
+        if (status == PageStatus.Inactive)
+            editorLoader.source = "";
+    }
 
     function commitTaskChanges()
     {
         if (edit.text != remember.currentTask.name)
             remember.currentTask.name = edit.text;
 
-        if (newdate != remember.currentTask.due)
-            remember.currentTask.due = newdate;
+        if (duedateText.text != Qt.formatDate(remember.currentTask.due))
+            remember.currentTask.due = new Date(duedateText.text);
 
-        newdate = new Date();
         pageStack.pop();
     }
 
@@ -23,8 +26,12 @@ Page {
         id: dueDatePicker
         titleText: "Due date"
         onAccepted: {
-            newdate = new Date(dueDatePicker.year+"-"+dueDatePicker.month+"-"+dueDatePicker.day);
-            duedateText.text = Qt.formatDate(newdate);
+            var d = new Date();
+            d.setFullYear(dueDatePicker.year);
+            d.setMonth(dueDatePicker.month - 1); // Month is 0 based in Date.
+            d.setDate(dueDatePicker.day);
+            console.log("new due date is " + d);
+            duedateText.text = Qt.formatDate(d);
         }
     }
 
@@ -85,23 +92,24 @@ Page {
             }
 
             Label {
-                id: dueLabel
                 text: "Due:"
-                visible: duedateText.text.length > 0;
             }
 
-            Text {
+            Label {
                 id: duedateText;
-                height: 30;
                 text: Qt.formatDate(remember.currentTask.due);
-                font.pixelSize: 25;
+
+                MouseArea {
+                    anchors.fill: parent;
+                    onClicked: dueDatePicker.open();
+                }
             }
 
             Button {
                 id: addDueDate;
                 text: qsTr("Add due date");
-                onClicked: dueDatePicker.open()
-                visible: !dueLabel.visible
+                onClicked: dueDatePicker.open();
+                visible: duedateText.text.length == 0
             }
 
             Label {

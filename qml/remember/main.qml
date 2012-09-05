@@ -17,7 +17,8 @@ PageStackWindow {
 
     function editTask()
     {
-        pageStack.push(taskEditor);
+        editorLoader.source = "TaskEditor.qml"
+        pageStack.push(editorLoader.item);
     }
 
     Connections {
@@ -43,8 +44,8 @@ PageStackWindow {
         id: tasksPage;
     }
 
-    TaskEditor {
-        id: taskEditor;
+    Loader {
+        id: editorLoader;
     }
 
     Dialog {
@@ -107,8 +108,8 @@ PageStackWindow {
             id: doneButton;
             platformIconId: "toolbar-done";
             onClicked: (pageStack.currentPage == tasksPage ? remember.markTasksCompleted()
-                                                           : taskEditor.commitTaskChanges())
-            visible: remember.selectedTasksCount > 0 || pageStack.currentPage == taskEditor;
+                                                           : editorLoader.item.commitTaskChanges())
+            visible: remember.selectedTasksCount > 0 || pageStack.currentPage == editorLoader.item;
         }
 
         ToolIcon {
