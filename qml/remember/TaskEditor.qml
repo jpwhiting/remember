@@ -16,7 +16,9 @@ Page {
         if (edit.text != remember.currentTask.name)
             remember.currentTask.name = edit.text;
 
-        if (duedateText.text != Qt.formatDate(remember.currentTask.due))
+        if (duedateText.text == "" && Qt.formatDate(remember.currentTask.due) != "")
+            remember.currentTask.removeDue();
+        else if (duedateText.text != Qt.formatDate(remember.currentTask.due))
             remember.currentTask.due = new Date(duedateText.text);
 
         pageStack.pop();
@@ -95,21 +97,33 @@ Page {
                 text: "Due:"
             }
 
-            Label {
-                id: duedateText;
-                text: Qt.formatDate(remember.currentTask.due);
+            Row {
+                id: duerow;
+                spacing: 5
 
-                MouseArea {
-                    anchors.fill: parent;
-                    onClicked: dueDatePicker.open();
+                Label {
+                    id: duedateText;
+                    text: Qt.formatDate(remember.currentTask.due);
+
+                    MouseArea {
+                        anchors.fill: parent;
+                        onClicked: dueDatePicker.open();
+                    }
                 }
-            }
 
-            Button {
-                id: addDueDate;
-                text: qsTr("Add due date");
-                onClicked: dueDatePicker.open();
-                visible: duedateText.text.length == 0
+                Button {
+                    id: addDueDate;
+                    text: qsTr("Add due date");
+                    onClicked: dueDatePicker.open();
+                    visible: duedateText.text.length == 0
+                }
+
+                Button {
+                    id: clearDueDate;
+                    text: qsTr("Remove due date");
+                    onClicked: duedateText.text = "";
+                    visible: duedateText.text.length > 0
+                }
             }
 
             Label {
