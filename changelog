@@ -1,5 +1,5 @@
 remember (0.0.4) unstable; urgency=low
-  * Set duedate support
+  * Set and clear due date support
   * Edit task name support
 
  -- Jeremy Whiting <jpwhiting@kde.org>  Wed, 22 Aug 2012 23:59:45 -0600
