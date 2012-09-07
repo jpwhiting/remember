@@ -21,6 +21,9 @@ Page {
         else if (duedateText.text != Qt.formatDate(remember.currentTask.due))
             remember.currentTask.due = new Date(duedateText.text);
 
+        if (priorityColumn.selectedIndex != remember.currentTask.priority)
+            remember.currentTask.priority = priorityColumn.selectedIndex;
+
         pageStack.pop();
     }
 
@@ -35,6 +38,25 @@ Page {
             console.log("new due date is " + d);
             duedateText.text = Qt.formatDate(d);
         }
+    }
+
+    TumblerDialog {
+        id: priorityDialog
+        titleText: qsTr("Priority")
+        columns: [ priorityColumn ]
+    }
+
+    TumblerColumn {
+        id: priorityColumn
+        items: ListModel {
+            id: priorityList
+            ListElement { value: "None" }
+            ListElement { value: "High" }
+            ListElement { value: "Medium" }
+            ListElement { value: "Low" }
+        }
+        label: qsTr("priority")
+        selectedIndex: remember.currentTask.priority
     }
 
     Rectangle {
@@ -91,6 +113,16 @@ Page {
                 height: 100
                 text: remember.currentTask.name;
                 wrapMode: TextEdit.Wrap
+            }
+
+            Label {
+                text: "Priority:"
+            }
+
+            TumblerButton {
+                id: priorityButton;
+                text: priorityList.get(priorityColumn.selectedIndex).value
+                onClicked: priorityDialog.open()
             }
 
             Label {

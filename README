@@ -12,10 +12,11 @@ Already included features:
     Marking tasks as completed
     Adding new tasks to existing lists
     Creating new lists
-    Editing tasks
+    Editing tasks (name, priority, due date)
 
 Features to be added:
 
+    Editing all task attributes
     Searching
 
 Build instructions:

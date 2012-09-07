@@ -1,4 +1,5 @@
 remember (0.0.4) unstable; urgency=low
+  * Set priority support
   * Set and clear due date support
   * Edit task name support
 
