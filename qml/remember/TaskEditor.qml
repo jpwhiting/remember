@@ -24,6 +24,9 @@ Page {
         if (priorityColumn.selectedIndex != remember.currentTask.priority)
             remember.currentTask.priority = priorityColumn.selectedIndex;
 
+        if (tagEdit.text != remember.currentTask.tags.join(","))
+            remember.currentTask.tags = tagEdit.text.split(",");
+
         pageStack.pop();
     }
 
@@ -55,7 +58,6 @@ Page {
             ListElement { value: "Medium" }
             ListElement { value: "Low" }
         }
-        label: qsTr("priority")
         selectedIndex: remember.currentTask.priority
     }
 
@@ -160,28 +162,16 @@ Page {
 
             Label {
                 text: "Tags:"
-                visible: tagsrow.height > 0;
             }
 
-            Row {
-                id: tagsrow;
-                spacing: 5;
-
-                Repeater {
-                    model: remember.currentTask.tags;
-
-                    Rectangle {
-                        color: "lightsteelblue";
-                        width: childrenRect.width;
-                        height: childrenRect.height;
-
-                        Text {
-                            text: modelData;
-                            font.pixelSize: 25;
-                        }
-                    }
-                }
+            TextArea {
+                id: tagEdit
+                anchors.left: parent.left
+                anchors.right: parent.right
+                height: 50
+                text: remember.currentTask.tags.join(",");
             }
+
         }
     }
 }
