@@ -61,6 +61,8 @@ RememberApp::RememberApp(QObject *parent) :
             SLOT(onAuthenticationDone(bool)));
     connect(d->session, SIGNAL(listChanged(RTM::List*)),
             SLOT(onListChanged(RTM::List*)));
+    connect(d->session, SIGNAL(listsChanged()),
+            SLOT(onListsChanged()));
 
     d->authToken = d->settings.value(kAuthTokenKey).toString();
 
@@ -101,7 +103,6 @@ void RememberApp::onAuthenticationDone(bool success)
 
         // Request lists and tasks.
         d->session->refreshListsFromServer();
-        d->session->refreshTasksFromServer();
     }
 }
 
@@ -118,6 +119,13 @@ void RememberApp::onListChanged(RTM::List* list)
         model->setList(list);
         d->tasksModels.insert(list->id(), model);
     }
+}
+
+void RememberApp::onListsChanged()
+{
+    disconnect(d->session, SIGNAL(listsChanged()),
+               this, SLOT(onListsChanged()));
+    d->session->refreshTasksFromServer();
 }
 
 RTM::Session *RememberApp::getSession() const

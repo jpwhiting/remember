@@ -87,6 +87,8 @@ private slots:
 
     void onListChanged(RTM::List* list);
 
+    void onListsChanged();
+
 private:
     class Private;
     Private *const d;
