@@ -40,6 +40,10 @@ ListsModel::ListsModel(QObject *parent) :
     roles[IdRole] = "id";
     roles[FilterRole] = "filter";
     roles[SortOrderRole] = "sortorder";
+    roles[HighCountRole] = "highcount";
+    roles[MediumCountRole] = "mediumcount";
+    roles[LowCountRole] = "lowcount";
+    roles[NoneCountRole] = "nonecount";
     setRoleNames(roles);
 }
 
@@ -50,6 +54,8 @@ void ListsModel::setSession(RTM::Session* session)
     d->session = session;
     connect(d->session, SIGNAL(listsChanged()),
             SLOT(onListsChanged()));
+    connect(d->session, SIGNAL(listChanged(RTM::List*)),
+            this, SLOT(onListChanged(RTM::List*)));
 }
 
 List *ListsModel::listFromId(RTM::ListId &id)
@@ -94,6 +100,18 @@ QVariant ListsModel::data ( const QModelIndex & index, int role) const
         {
         case Qt::DisplayRole:
             retval = list->name();
+            break;
+        case HighCountRole:
+            retval = list->incompleteTasks(1);
+            break;
+        case MediumCountRole:
+            retval = list->incompleteTasks(2);
+            break;
+        case LowCountRole:
+            retval = list->incompleteTasks(3);
+            break;
+        case NoneCountRole:
+            retval = list->incompleteTasks(4);
             break;
         case IdRole:
             retval = list->id();
@@ -140,6 +158,15 @@ void ListsModel::onListsChanged()
 
         endResetModel();
     }
+}
+
+void ListsModel::onListChanged(List *list)
+{
+    // Find the list's modelindex
+    int row = d->lists.indexOf(list);
+    QModelIndex changed = QAbstractListModel::index(row, 0);
+    // Emit changed signal for that index
+    emit dataChanged(changed, changed);
 }
 
 }

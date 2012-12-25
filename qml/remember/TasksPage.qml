@@ -19,9 +19,9 @@ Page {
                 anchors.right: checkBox.left;
                 anchors.margins: 5;
                 anchors.bottom: parent.bottom;
-                color: (priority == 1 ? "orange" :
-                        (priority == 2 ? "blue" :
-                         (priority == 3 ? "lightblue" : "lightgrey")));
+                color: (priority == 1 ? "darkorange" :
+                        (priority == 2 ? "darkblue" :
+                         (priority == 3 ? "darkcyan" : "darkgrey")));
                 width: 15;
             }
 

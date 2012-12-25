@@ -21,6 +21,58 @@ Page {
                 }
             }
 
+            Row {
+                id: countsRow
+                anchors.verticalCenter: parent.verticalCenter;
+                anchors.right: arrowIcon.left;
+                anchors.rightMargin: 20;
+                spacing: 5
+
+                Label {
+                    id: highCountText;
+                    anchors.verticalCenter: parent.verticalCenter;
+                    text: highcount;
+                    visible: highcount > 0;
+                    color: "darkorange"
+                    platformStyle: LabelStyle {
+                        fontPixelSize: 32;
+                    }
+                }
+
+                Label {
+                    id: medCountText;
+                    anchors.verticalCenter: parent.verticalCenter;
+                    text: mediumcount;
+                    visible: mediumcount > 0;
+                    color: "darkblue"
+                    platformStyle: LabelStyle {
+                        fontPixelSize: 32;
+                    }
+                }
+
+                Label {
+                    id: lowCountText;
+                    anchors.verticalCenter: parent.verticalCenter;
+                    text: lowcount;
+                    visible: lowcount > 0;
+                    color: "darkcyan"
+                    platformStyle: LabelStyle {
+                        fontPixelSize: 32;
+                    }
+                }
+
+                Label {
+                    id: noneCountText;
+                    anchors.verticalCenter: parent.verticalCenter;
+                    text: nonecount;
+                    visible: nonecount > 0;
+                    color: "darkgrey"
+                    platformStyle: LabelStyle {
+                        fontPixelSize: 32;
+                    }
+                }
+            }
+
             Rectangle {
                 id: line
                 y: parent.height
@@ -31,6 +83,7 @@ Page {
             }
 
             Image {
+                id: arrowIcon
                 source: "image://theme/icon-m-common-drilldown-arrow";
                 anchors.right: parent.right;
                 anchors.verticalCenter: parent.verticalCenter;

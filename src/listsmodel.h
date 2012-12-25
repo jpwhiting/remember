@@ -35,7 +35,11 @@ public:
     enum Roles {
         IdRole = Qt::UserRole + 1,
         FilterRole,
-        SortOrderRole
+        SortOrderRole,
+        HighCountRole,
+        MediumCountRole,
+        LowCountRole,
+        NoneCountRole
     };
 
     explicit ListsModel(QObject *parent = 0);
@@ -51,6 +55,7 @@ public:
 
 protected slots:
     void onListsChanged();
+    void onListChanged(RTM::List* list);
 
 private:
     class Private;

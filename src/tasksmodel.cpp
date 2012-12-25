@@ -66,7 +66,7 @@ void TasksModel::onListChanged()
 int TasksModel::rowCount(const QModelIndex &index) const
 {
     if (!index.isValid())
-        return d->list->tasks.size();
+        return d->list->taskCount();
     return 0;
 }
 
@@ -136,15 +136,7 @@ QVariant TasksModel::data ( const QModelIndex & index, int role) const
 
 RTM::Task* TasksModel::taskForRow(const int row) const
 {
-    Task * value = 0;
-    if (row >= 0 && row < d->list->tasks.size())
-    {
-        QHash<RTM::TaskId, Task*>::iterator i = d->list->tasks.begin();
-        i += row;
-        value = i.value();
-    }
-
-    return value;
+    return d->list->task(row);
 }
 
 } // namespace RTM
