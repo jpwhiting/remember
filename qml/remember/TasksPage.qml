@@ -102,7 +102,7 @@ Page {
                     id: duedateText;
                     anchors.top: parent.top;
                     anchors.right: parent.right;
-                    text: Qt.formatDate(duedate);
+                    text: Qt.formatDate(duedate, session.dateFormat());
                     font.pixelSize: 15;
                 }
             }

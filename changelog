@@ -1,12 +1,17 @@
+remember (0.0.7) unstable; urgency=low
+  * Fix date display to use chosen format from rtm settings.
+
+ -- Jeremy Whiting <jpwhiting@kde.org>  Wed, 22 May 2013 14:02:43 -0600
+
 remember (0.0.6) unstable; urgency=low
   * Show incomplete task numbers by priority in list view.
 
- -- Jeremy Whiting <jpwhiting@kde.org> Mon, 17 Dec 2012 18:06:00 -0600
+ -- Jeremy Whiting <jpwhiting@kde.org>  Mon, 17 Dec 2012 18:06:00 -0600
 
 remember (0.0.5) unstable; urgency=low
   * Edit task tags support
 
- -- Jeremy Whiting <jpwhiting@kde.org> Wed, 19 Sep 2012 13:35:00 -0600
+ -- Jeremy Whiting <jpwhiting@kde.org>  Wed, 19 Sep 2012 13:35:00 -0600
 
 remember (0.0.4) unstable; urgency=low
   * Set priority support
