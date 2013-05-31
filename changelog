@@ -1,3 +1,8 @@
+remember (0.0.8) unstable; urgency=low
+  * Make back button on task editor save the task, remove confusing check button. 
+
+ -- Jeremy Whiting <jpwhiting@kde.org>  Fri, 31 May 2013 16:50:08 -0600
+
 remember (0.0.7) unstable; urgency=low
   * Fix date display to use chosen format from rtm settings.
 

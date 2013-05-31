@@ -100,16 +100,15 @@ PageStackWindow {
         ToolIcon {
             id: backButton;
             platformIconId: "toolbar-back";
-            onClicked: pageStack.pop();
+            onClicked: pageStack.currentPage == editorLoader.item ? editorLoader.item.commitTaskChanges() : pageStack.pop();
             visible: (pageStack.depth > 1);
         }
 
         ToolIcon {
             id: doneButton;
             platformIconId: "toolbar-done";
-            onClicked: (pageStack.currentPage == tasksPage ? remember.markTasksCompleted()
-                                                           : editorLoader.item.commitTaskChanges())
-            visible: remember.selectedTasksCount > 0 || pageStack.currentPage == editorLoader.item;
+            onClicked: remember.markTasksCompleted()
+            visible: remember.selectedTasksCount > 0
         }
 
         ToolIcon {
